@@ -31,8 +31,15 @@ void draw() {
 }
 
 void generateMaze() {
-  GridCoord coord = new GridCoord(50, 50, false);
+  int mazeStart = int(random(2,49));
+  GridCoord coord = new GridCoord(1, mazeStart, false);
   fullGrid.get(coord.XYtoIndex()).on = false;
+  coord.x += 1;
+  fullGrid.get(coord.XYtoIndex()).on = false;
+  checkLater.add(coord);
+  while ((checkLater.size() != 0)) {
+    
+  }
 }
 
 int whichDirection(int prevDirec, GridCoord current) {
@@ -56,7 +63,20 @@ int whichDirection(int prevDirec, GridCoord current) {
 
 boolean canGo(int direction, GridCoord current) {
   if (direction == 0) {
-    if (fullGrid.contains(new GridCoord(current.x, current.y - 2, true))) {
+    current.y -= 2;
+    GridCoord coord1 = current;
+    current.y -= 1;
+    current.x -= 1;
+    GridCoord coord2 = current;
+    current.x += 2;
+    GridCoord coord3 = current;
+    if (coord1.on && coord2.on && coord3.on) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (direction == 1) {
+    if (fullGrid.contains(new GridCoord(current.x + 2, current.y, true)) && fullGrid.contains(new GridCoord(current.x + 1, current.y - 1, true)) && fullGrid.contains(new GridCoord(current.x - 1, current.y - 1, true))) {
       return true;
     } else {
       return false;

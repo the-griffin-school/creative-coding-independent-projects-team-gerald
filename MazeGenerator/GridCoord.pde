@@ -19,7 +19,7 @@ class GridCoord {
     rect(xLoc, yLoc, 14, 14);
   } 
   int XYtoIndex() {
-    return (52 * x) + y;
+    return (52 * y) + x;
   }
 }
 

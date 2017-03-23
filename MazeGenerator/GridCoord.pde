@@ -8,8 +8,8 @@ class GridCoord {
   }
   
   void display() {
-    int xLoc = 72 + (x * 14);
-    int yLoc = -28 + (y * 14);   
+    int xLoc = 86 + (x * 14);
+    int yLoc = -14 + (y * 14);   
     if (on) {
       fill(255, 0, 0);
     } else {
@@ -18,4 +18,9 @@ class GridCoord {
     noStroke();
     rect(xLoc, yLoc, 14, 14);
   } 
+  int XYtoIndex() {
+    return (52 * x) + y;
+  }
 }
+
+ 

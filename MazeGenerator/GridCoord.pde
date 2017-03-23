@@ -11,7 +11,7 @@ class GridCoord {
     if (on) {
       fill(255, 0, 0);
     } else {
-      fill(255);
+      noFill();
     }
     noStroke();
     rect(xLoc, yLoc, 14, 14);

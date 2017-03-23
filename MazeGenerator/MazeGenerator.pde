@@ -5,7 +5,7 @@ Team Gerald
 Maze Generation Project
 */
 import java.util.Map;
-HashMap<GridCoord,Boolean> fullGrid = new HashMap<GridCoord,Boolean>();
+ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<GridCoord> checkLater = new ArrayList<GridCoord>();
 
 void setup() {
@@ -14,23 +14,24 @@ void setup() {
   for (int i = 1; i <= 52; i++) {
     for (int j = 1; j <= 52; j++) {
       if ((i == 1) || (j == 1) || (i == 52) || (j == 52)) {
-        fullGrid.put(new GridCoord(j, i), false);
+        fullGrid.add(new GridCoord(j, i, false));
       } else {
-        fullGrid.put(new GridCoord(j, i), true);
+        fullGrid.add(new GridCoord(j, i, true));
       }
     }
   }
+  generateMaze();
 }
 
 void draw() {
   //Display Maze Grid
-  for (GridCoord k: fullGrid.keySet()) {
-    k.display(fullGrid.get(k));
+  for (int i = 0; i < fullGrid.size(); i++) {
+    fullGrid.get(i).display();
   }
 }
 
 void generateMaze() {
-  fullGrid.get(new GridCoord(2, int(random(3, 48))));
+  fullGrid.
 }
 
 int whichDirection(int prevDirec, GridCoord current) {
@@ -54,30 +55,12 @@ int whichDirection(int prevDirec, GridCoord current) {
 
 boolean canGo(int direction, GridCoord current) {
   if (direction == 0) {
-    if (fullGrid.get(new GridCoord(current.x, current.y - 2)) && fullGrid.get(new GridCoord(current.x + 1, current.y - 1)) && fullGrid.get(new GridCoord(current.x - 1, current.y - 1))) {
-      return true;
-    } else {
-      return false;
-    }
-  } else if (direction == 1) {
-    if (fullGrid.get(new GridCoord(current.x + 2, current.y)) && fullGrid.get(new GridCoord(current.x + 1, current.y - 1)) && fullGrid.get(new GridCoord(current.x + 1, current.y + 1))) {
-      return true;
-    } else {
-      return false;
-    }
-  } else if (direction == 2) {
-    if (fullGrid.get(new GridCoord(current.x, current.y + 2)) && fullGrid.get(new GridCoord(current.x + 1, current.y + 1)) && fullGrid.get(new GridCoord(current.x - 1, current.y + 1))) {
-      return true;
-    } else {
-      return false;
-    }
-  } else if (direction == 3) {
-    if (fullGrid.get(new GridCoord(current.x - 2, current.y)) && fullGrid.get(new GridCoord(current.x - 1, current.y + 1)) && fullGrid.get(new GridCoord(current.x - 1, current.y - 1))) {
+    if (fullGrid.contains(new GridCoord(current.x, current.y - 2, true))) {
       return true;
     } else {
       return false;
     }
   } else {
-    return false;
+  return false;
   }
 }

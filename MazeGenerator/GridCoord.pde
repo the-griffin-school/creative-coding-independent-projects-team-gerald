@@ -1,11 +1,13 @@
 class GridCoord {
   int x, y;
-  GridCoord(int x, int y) {
+  boolean on;
+  GridCoord(int x, int y, boolean on) {
     this.x = x;
     this.y = y;
+    this.on = on;
   }
   
-  void display(boolean on) {
+  void display() {
     int xLoc = 72 + (x * 14);
     int yLoc = -28 + (y * 14);   
     if (on) {

@@ -42,9 +42,17 @@ class GridCoord {
     //If they can, add them to the possible list
     IntList directions = new IntList(0, 1, 2, 3);
     IntList possible = new IntList();
+    //The main direction it is going, based on where it has been (to make the maze straighter)
+    int mainDirec = direcToPrev(prevDirec);
     for (int i = 0; i < directions.size(); i++) {
       if (!(directions.get(i) == prevDirec) && canGo(i)) {
         possible.append(directions.get(i));
+        //If it is possible to go in the main direction, add the direction more times so that it goes straight more often than it turns.
+        if (directions.get(i) == mainDirec) {
+          for (int j = 0; j < 9; j++) {
+            possible.append(directions.get(i));
+          }
+        }
       }
     }
     //If the size is 1, don't add the index to checkLater as we already know that it can't go anywhere else

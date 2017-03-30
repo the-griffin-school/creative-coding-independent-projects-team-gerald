@@ -1,10 +1,13 @@
 /* 
+Team Gerald
+
 The class for a block within the grid. It can:
 -Be on & off, depending on if it's a wall or not
 -Display itself
 -Convert to index
 -Determine possible directions a new grid can go in generation
-Mostly Written by Peyton Tanzillo
+
+Written by Peyton Tanzillo
 */
 
 class GridCoord {

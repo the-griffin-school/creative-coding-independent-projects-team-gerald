@@ -4,21 +4,74 @@ Team Gerald
 
 Maze Generation Project
 */
+
 import java.util.Map;
+
+float playerX = 7;//declares playerX of type float
+float playerY = height/2;//declares playerY of type float
+float playerSpeed = 14;//declares playerSpeed of type float and set playerSpeed = 1
+boolean xTrue;
+boolean yTrue;
 ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<Integer> checkLater = new ArrayList<Integer>();
 
 void setup() {
-  size(900, 700);
+  size(900, 700);  
   resetGrid();
+  }
   generateMaze();
 }
 
 void draw() {
+  if(key == 'w'){//if w is pressed
+  playerY = playerY-playerSpeed;//move up
+  }
+  if(key == 'a'){//if a is pressed
+  playerX = playerX-playerSpeed;//move left
+  }
+  if(key == 's'){//if s is pressed
+  playerY = playerY+playerSpeed;//move down
+  }    
+  if(key == 'd'){//if d is pressed
+  playerX = playerX+playerSpeed;//move right
+  }
+  if(playerX > width || playerX < 0 || playerY > height || playerY < 0){//if player goes out of map
+    fill(0);
+    rect(0, 0, width, height);//make screen black
+  }
+  for(int i=0; i < fullGrid.size(); i++){
+    if(playerX > fullGrid.get(i).xLoc && playerX < fullGrid.get(i).xLoc+14){
+      xTrue = true;
+    }
+    else{
+      xTrue = false;
+    }
+    if(playerY < fullGrid.get(i).yLoc && playerY > fullGrid.get(i).yLoc+14){
+      yTrue = true;
+    }
+    else{
+      yTrue = false;
+    }
+  }
+  if(xTrue == true && yTrue == true){
+    fill(0);
+    rect(0, 0, width, height);//make screen black
+  }
+  noStroke();
+  fill(195, 0, 0);//make dark red
+  ellipse(playerX, playerY, 10, 10);//draw ellipse at playerX, playerY, with a radius 10
+  
   //Display Maze Grid
   for (int i = 0; i < fullGrid.size(); i++) {
     fullGrid.get(i).display();
   }
+}
+
+void keyReleased(){//if any key is released
+  playerSpeed = 0;//set playerSpeed = 0
+}
+void keyPressed(){//if any key is pressed
+  playerSpeed = 1;//set playerSpeed = 1
 }
 /* 
 Peyton Tanzillo's Code

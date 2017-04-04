@@ -20,6 +20,7 @@ class GridCoord {
     this.y = y;
     this.on = on;
   }
+  
   //The display function to display the grid cube.
   void display() {
     //Display the block based on its position within the grid. 
@@ -34,6 +35,7 @@ class GridCoord {
     noStroke();
     rect(xLoc, yLoc, 14, 14);
   } 
+  
   //Convert the x & y variables to an index to be called in the full grid
   int XYtoIndex() {
     return (52 * y) + x;
@@ -163,5 +165,3 @@ class GridCoord {
     return this;
   }
 }
-
- 

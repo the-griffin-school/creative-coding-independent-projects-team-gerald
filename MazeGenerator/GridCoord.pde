@@ -12,7 +12,7 @@ Written by Peyton Tanzillo
 
 class GridCoord {
   //x & y location of the block relative to other blocks
-  int x, y;
+  int x, y, xLoc, yLoc;
   //Is the block a wall (on) or a gap? (not on)
   boolean on;
   GridCoord(int x, int y, boolean on) {
@@ -24,8 +24,8 @@ class GridCoord {
   //The display function to display the grid cube.
   void display() {
     //Display the block based on its position within the grid. 
-    int xLoc = 86 + (x * 14);
-    int yLoc = -14 + (y * 14); 
+    xLoc = 86 + (x * 14);
+    yLoc = -14 + (y * 14); 
     //If it's a wall, display the block, if not, don't.
     if (on) {
       fill(255, 0, 0);

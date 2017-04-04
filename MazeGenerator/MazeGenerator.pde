@@ -18,7 +18,6 @@ ArrayList<Integer> checkLater = new ArrayList<Integer>();
 void setup() {
   size(900, 700);  
   resetGrid();
-  }
   generateMaze();
 }
 
@@ -39,7 +38,7 @@ void draw() {
     fill(0);
     rect(0, 0, width, height);//make screen black
   }
-  for(int i=0; i < fullGrid.size(); i++){
+  for(int i=0; i < fullGrid.size(); i++) {
     if(playerX > fullGrid.get(i).xLoc && playerX < fullGrid.get(i).xLoc+14){
       xTrue = true;
     }

@@ -7,35 +7,51 @@ Maze Generation Project
 import java.util.Map;
 
 boolean gen;
-int prevDirection;
-int count;
+int prevDirection, count;
 GridCoord currCoord;
 Player player = new Player(20, height/2);
 ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<Integer> checkLater = new ArrayList<Integer>();
+int currentRate = 1;
+float currentPlace = 1;
 
 void setup() {
   size(900, 700);  
   resetGrid();
   mazeSetup();
   gen = true;
+  frameRate(1);
 }
 
 void draw() {
+  /* 
+    CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
+  */
+  if (currentRate < 60) {
+    currentRate++;
+    frameRate(currentRate);
+  } else {
+    currentPlace += .1;
+  }
+  /* 
+  OKAY CHO DOESN'T WANT CREDIT ANYMORE THAT IS ALL KTHXBAI
+  */
   background(255);
   player.drawLoop();
   if (gen) {
     GridCoord coord = currCoord;
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < currentPlace; i++) {
       if (checkLater.size() == 0) {
-        mazeGenEnd();
-        gen = false;
         break;
       } else {
         currCoord = mazeGenDraw(coord);
         coord = currCoord;
       }
     }
+  }
+  if (checkLater.size() == 0 && gen) {
+    mazeGenEnd();
+    gen = false;
   }
   noStroke();
   

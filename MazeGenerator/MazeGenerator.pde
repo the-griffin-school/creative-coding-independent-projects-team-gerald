@@ -1,5 +1,6 @@
 /*
 Cole, Peyton, and Eliza
+
 Team Gerald
 Maze Generation Project
 */
@@ -36,6 +37,13 @@ void draw() {
   /* 
   OKAY CHO DOESN'T WANT CREDIT ANYMORE THAT IS ALL KTHXBAI
   */
+  //Collision Code
+  for (int i=0; i < fullGrid.size(); i++) {
+    if (fullGrid.get(i).on == true && playerX > fullGrid.get(i).xLoc && playerX < fullGrid.get(i).xLoc+14 && playerY < fullGrid.get(i).yLoc+14 && playerY > fullGrid.get(i).yLoc) {
+      delay(1000);
+      exit();
+    }
+  }
   background(255);
   player.drawLoop();
   if (gen) {
@@ -60,6 +68,7 @@ void draw() {
     fullGrid.get(i).display();
   }
 }
+
 
 void keyReleased(){//if any key is released
   player.keyLoop(false);
@@ -100,7 +109,7 @@ void mazeGenEnd() {
   //Once that list is generated, get a random number in that list and make that the exit.
   exitHelp = fullGrid.get(exits.get(int(random(0,exits.size()))));
   exitHelp.x += 1;
-  fullGrid.get(exitHelp.XYtoIndex()).on = false; 
+  fullGrid.get(exitHelp.XYtoIndex()).on = false;
 }
 
 //Change the direction that the pice just went into a direction that the piece came from

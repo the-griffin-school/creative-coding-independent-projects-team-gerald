@@ -1,4 +1,5 @@
 /* 
+
  Team Gerald
  
  The class for a block within the grid. It can:
@@ -9,7 +10,7 @@
  
  Written by Peyton Tanzillo
  */
-
+ 
 class GridCoord {
   //x & y location of the block relative to other blocks
   int x, y, xLoc, yLoc;
@@ -64,11 +65,12 @@ class GridCoord {
     //Return the only direction it can go
     if (possible.size() == 1) {
       return possible.get(0);
-      //If the size is greater than 1, add the index to checkLater because it might be able to branch in the future
-      //Return the only direction it can go
+
+    //If the size is greater than 1, add the index to checkLater because it might be able to branch in the future
+    //Return the only direction it can go
     } else if (possible.size() > 1) {
       checkLater.add(XYtoIndex());
-      return possible.get(int(random(0, possible.size())));
+      return possible.get(int(random(0,possible.size())));
       //If there are no direction it can go, return 4
     } else {
       return 4;
@@ -151,13 +153,14 @@ class GridCoord {
     //If direction 0, move north
     if (direction == 0) {
       y--;
-      //If direction 1, move east
+    //If direction 1, move east
     } else if (direction == 1) {
       x++;
-      //If direction 2, move south
+    //If direction 2, move south
     } else if (direction == 2) {
       y++;
-      //If direction 3, move west
+    //If direction 3, move west
+
     } else if (direction == 3) {
       x--;
     }

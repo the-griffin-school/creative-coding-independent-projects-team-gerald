@@ -39,7 +39,7 @@ void draw() {
   */
   //Collision Code
   for (int i=0; i < fullGrid.size(); i++) {
-    if (fullGrid.get(i).on == true && playerX > fullGrid.get(i).xLoc && playerX < fullGrid.get(i).xLoc+14 && playerY < fullGrid.get(i).yLoc+14 && playerY > fullGrid.get(i).yLoc) {
+    if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc && player.x < fullGrid.get(i).xLoc+14 && player.y < fullGrid.get(i).yLoc+14 && player.y > fullGrid.get(i).yLoc) {
       delay(1000);
       exit();
     }

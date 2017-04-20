@@ -1,18 +1,19 @@
 /* 
-Team Gerald
 
-The class for a block within the grid. It can:
--Be on & off, depending on if it's a wall or not
--Display itself
--Convert to index
--Determine possible directions a new grid can go in generation
-
-Written by Peyton Tanzillo
-*/
-
+ Team Gerald
+ 
+ The class for a block within the grid. It can:
+ -Be on & off, depending on if it's a wall or not
+ -Display itself
+ -Convert to index
+ -Determine possible directions a new grid can go in generation
+ 
+ Written by Peyton Tanzillo
+ */
+ 
 class GridCoord {
   //x & y location of the block relative to other blocks
-  int x, y;
+  int x, y, xLoc, yLoc;
   //Is the block a wall (on) or a gap? (not on)
   boolean on;
   GridCoord(int x, int y, boolean on) {
@@ -20,12 +21,12 @@ class GridCoord {
     this.y = y;
     this.on = on;
   }
-  
+
   //The display function to display the grid cube.
   void display() {
     //Display the block based on its position within the grid. 
-    int xLoc = 86 + (x * 14);
-    int yLoc = -14 + (y * 14); 
+    xLoc = 86 + (x * 14);
+    yLoc = -14 + (y * 14); 
     //If it's a wall, display the block, if not, don't.
     if (on) {
       fill(255, 0, 0);
@@ -35,12 +36,12 @@ class GridCoord {
     noStroke();
     rect(xLoc, yLoc, 14, 14);
   } 
-  
+
   //Convert the x & y variables to an index to be called in the full grid
   int XYtoIndex() {
     return (52 * y) + x;
   }
-  
+
   //Determine which direction the piece should go during generation
   int whichDirection(int prevDirec) {
     //Determine wether these directions can be gone towards based on the canGo function and previous direction
@@ -64,6 +65,7 @@ class GridCoord {
     //Return the only direction it can go
     if (possible.size() == 1) {
       return possible.get(0);
+
     //If the size is greater than 1, add the index to checkLater because it might be able to branch in the future
     //Return the only direction it can go
     } else if (possible.size() > 1) {
@@ -74,7 +76,7 @@ class GridCoord {
       return 4;
     }
   }
-  
+
   //Check if it CAN go in a specific direction
   boolean canGo(int direction) {
     if (direction == 0) {
@@ -145,7 +147,7 @@ class GridCoord {
       return false;
     }
   }
-  
+
   //Go the direction 
   GridCoord goDirection(int direction) {
     //If direction 0, move north
@@ -158,6 +160,7 @@ class GridCoord {
     } else if (direction == 2) {
       y++;
     //If direction 3, move west
+
     } else if (direction == 3) {
       x--;
     }

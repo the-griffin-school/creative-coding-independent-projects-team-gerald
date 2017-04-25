@@ -1,5 +1,6 @@
 /*
 Cole, Peyton, and Eliza
+
 Team Gerald
 Maze Generation Project
 */
@@ -56,8 +57,8 @@ void draw() {
     if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc-5 && player.x < fullGrid.get(i).xLoc+19 && player.y < fullGrid.get(i).yLoc+19 && player.y > fullGrid.get(i).yLoc-5 || player.x < 0 || player.y < 0 || player.y > height) {
     player.x = 20;
     player.y = height/2;
-    }
   }
+}
   background(255);
   player.drawLoop();
   if (gen) {
@@ -82,6 +83,7 @@ void draw() {
     fullGrid.get(i).display();
   }
 }
+
 
 void keyReleased(){//if any key is released
   player.keyLoop(false);
@@ -122,7 +124,7 @@ void mazeGenEnd() {
   //Once that list is generated, get a random number in that list and make that the exit.
   exitHelp = fullGrid.get(exits.get(int(random(0,exits.size()))));
   exitHelp.x += 1;
-  fullGrid.get(exitHelp.XYtoIndex()).on = false; 
+  fullGrid.get(exitHelp.XYtoIndex()).on = false;
 }
 
 //Change the direction that the pice just went into a direction that the piece came from

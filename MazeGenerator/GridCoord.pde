@@ -33,6 +33,9 @@ class GridCoord {
       noFill();
     }
     noStroke();
+    if(mouseX > 850 && mouseY > 650){//if mouse is in bottom right 50 pixel coorner
+      fill(random(0,255), random(0,255), random(0,255));//make the maze throwup
+    }
     rect(xLoc, yLoc, 14, 14);
   } 
 

@@ -14,6 +14,11 @@ ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<Integer> checkLater = new ArrayList<Integer>();
 int currentRate = 1;
 float currentPlace = 1;
+int startPointY = (int(random(2,49)));
+float rndR = random(0, 255);
+float rndG = random(0, 255);
+float rndB = random(0, 255);
+float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
 
 void setup() {
   size(900, 700);  
@@ -22,9 +27,20 @@ void setup() {
   gen = true;
   frameRate(1);
 }
-
 void draw() {
-  /* 
+  /*
+  //if(the player reaches a deadend){//if the player reaches a dead end
+    if(mouseX > width/2){//if the mouse is on the right side of the screen
+      textSize(48-scaled);
+    }
+    if(mouseX < width/2){//if the mouse is on the left side of the screen
+      textSize(48-scaled);
+    }
+    fill(rndR, rndG, rndB);//fill with random colors once
+    text("Congragulations, you reached an end", width/2, height/2);//display "Congragulation, you reached and end" at the middle
+  //}
+  */
+  /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
   */
   if (currentRate < 60) {
@@ -36,6 +52,12 @@ void draw() {
   /* 
   OKAY CHO DOESN'T WANT CREDIT ANYMORE THAT IS ALL KTHXBAI
   */
+  for (int i=0; i < fullGrid.size(); i++) {
+    if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc-5 && player.x < fullGrid.get(i).xLoc+19 && player.y < fullGrid.get(i).yLoc+19 && player.y > fullGrid.get(i).yLoc-5 || player.x < 0 || player.y < 0 || player.y > height) {
+    player.x = 20;
+    player.y = height/2;
+    }
+  }
   background(255);
   player.drawLoop();
   if (gen) {
@@ -74,7 +96,7 @@ Peyton Tanzillo's Code
 //The full function for generating a maze
 void mazeSetup() {
   //Create a coordinate for reference so we can call the correct values
-  currCoord = new GridCoord(1, int(random(2,49)), false);
+  currCoord = new GridCoord(1, startPointY, false);
   //Get the entrance coord and make it false
   fullGrid.get(currCoord.XYtoIndex()).on = false;
   //Get the coord to the right of that coord and make it false

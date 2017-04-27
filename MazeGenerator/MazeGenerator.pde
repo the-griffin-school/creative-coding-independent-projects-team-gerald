@@ -19,7 +19,6 @@ int startPointY = (int(random(2,49)));
 float rndR = random(0, 255);
 float rndG = random(0, 255);
 float rndB = random(0, 255);
-float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
 
 void setup() {
   size(900, 700);  
@@ -31,14 +30,12 @@ void setup() {
 void draw() {
   /*
   //if(the player reaches a deadend){//if the player reaches a dead end
-    if(mouseX > width/2){//if the mouse is on the right side of the screen
-      textSize(48-scaled);
-    }
-    if(mouseX < width/2){//if the mouse is on the left side of the screen
-      textSize(48-scaled);
-    }
+    background(255);
+    float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
+    textSize(scaled);
     fill(rndR, rndG, rndB);//fill with random colors once
-    text("Congragulations, you reached an end", width/2, height/2);//display "Congragulation, you reached and end" at the middle
+    text("Congragulations, you reached an end", width/2, height/2);//display "Congragulations, you reached and end" at the middle
+    //"(not the right end)" small constant size below in red
   //}
   */
   /*
@@ -55,9 +52,9 @@ void draw() {
   */
   for (int i=0; i < fullGrid.size(); i++) {
     if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc-5 && player.x < fullGrid.get(i).xLoc+19 && player.y < fullGrid.get(i).yLoc+19 && player.y > fullGrid.get(i).yLoc-5 || player.x < 0 || player.y < 0 || player.y > height) {
-    player.x = 20;
-    player.y = height/2;
-  }
+    player.x = player.prevX;
+    player.y = player.prevY;
+    }
 }
   background(255);
   player.drawLoop();

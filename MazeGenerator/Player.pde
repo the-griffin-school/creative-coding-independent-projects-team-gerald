@@ -25,8 +25,8 @@ class Player {
   left = false;
   down = false;
   right = false;
-  //Move speed is 1
-  moveSpeed = 1;
+  //Move speed is 3
+  moveSpeed = 3;
 }
 
   void drawLoop() {

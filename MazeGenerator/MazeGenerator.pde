@@ -19,6 +19,9 @@ int startPointY = (int(random(2,49)));
 float rndR = random(0, 255);
 float rndG = random(0, 255);
 float rndB = random(0, 255);
+float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
+PImage img;
+boolean rainbowing = false;
 
 void setup() {
   size(900, 700);  
@@ -26,6 +29,7 @@ void setup() {
   mazeSetup();
   gen = true;
   frameRate(1);
+  img = loadImage("welcometotheinternetsayscole.jpeg");
 }
 void draw() {
   /*
@@ -38,6 +42,7 @@ void draw() {
     //"(not the right end)" small constant size below in red
   //}
   */
+  image(img, 0, 0);
   /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
   */

@@ -32,8 +32,6 @@ class Player {
   void drawLoop() {
     //Move the player
     move();
-    //make dark red
-    fill(195, 0, 0);
     //No stroke on the circle
     noStroke();
     //Draw the player circle

@@ -28,7 +28,7 @@ void setup() {
   resetGrid();
   mazeSetup();
   gen = true;
-  frameRate(1);
+  frameRate(60);
   img = loadImage("welcometotheinternetsayscole.jpeg");
 }
 void draw() {
@@ -121,7 +121,7 @@ void mazeSetup() {
 }
 
 void mazeGenEnd() {
-  //Create a list of possible exits based on if the space at x:49 is a wall or not.
+  //Create a list of possible exits based on if the space at x:49 is a wall or not. 
   IntList exits = new IntList();
   GridCoord exitHelp = new GridCoord(49, 2, false);
   for (int i = 2; i < 50; i++) {
@@ -132,6 +132,7 @@ void mazeGenEnd() {
   }
   //Once that list is generated, get a random number in that list and make that the exit.
   exitHelp = fullGrid.get(exits.get(int(random(0,exits.size()))));
+  println(exitHelp.y);
   exitHelp.x += 1;
   fullGrid.get(exitHelp.XYtoIndex()).on = false;
 }

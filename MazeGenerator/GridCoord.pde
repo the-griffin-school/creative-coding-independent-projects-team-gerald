@@ -31,7 +31,9 @@ class GridCoord {
     xLoc = 86 + (x * 14);
     yLoc = -14 + (y * 14); 
     //If it's a wall, display the block, if not, don't.
-    if (on) {
+    if(mouseX > 850 && mouseY < 50){//if mouse is in top right 50 pixel corner
+        fill(25, 200, 25);
+    } else if (on) {
       if(mouseX > 850 && mouseY < 50){//if mouse is in top right 50 pixel corner
         fill(random(0,255), random(0,255), random(0,255));//make the maze throwup
       } else if (rainbowing){//if mouse is in bottom right 50 pixel corner
@@ -46,7 +48,7 @@ class GridCoord {
         rainbowing = false;
       }
     } else {
-      noFill();
+      fill(255);
     }
     noStroke();
     rect(xLoc, yLoc, 14, 14);

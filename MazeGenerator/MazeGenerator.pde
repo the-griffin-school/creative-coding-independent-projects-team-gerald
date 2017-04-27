@@ -20,6 +20,8 @@ float rndR = random(0, 255);
 float rndG = random(0, 255);
 float rndB = random(0, 255);
 float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
+PImage img;
+boolean rainbowing = false;
 
 void setup() {
   size(900, 700);  
@@ -27,6 +29,7 @@ void setup() {
   mazeSetup();
   gen = true;
   frameRate(1);
+  img = loadImage("welcometotheinternetsayscole.jpeg");
 }
 void draw() {
   /*
@@ -41,6 +44,7 @@ void draw() {
     text("Congragulations, you reached an end", width/2, height/2);//display "Congragulation, you reached and end" at the middle
   //}
   */
+  image(img, 0, 0);
   /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
   */

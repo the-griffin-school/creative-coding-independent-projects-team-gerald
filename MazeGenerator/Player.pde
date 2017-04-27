@@ -12,8 +12,6 @@ class Player {
   boolean up,left,down,right;
   //The speed that the player is moving at
   float moveSpeed;
-  //The Diamater of the player
-  int playerDiamater = 10;
   /* 
   Player Constructor (x position, y position)
   */
@@ -26,7 +24,7 @@ class Player {
   down = false;
   right = false;
   //Move speed is 3
-  moveSpeed = 1;
+  moveSpeed = 3;
 }
 
   void drawLoop() {
@@ -38,7 +36,7 @@ class Player {
     noStroke();
     //Draw the player circle
    fill(random(0,255), random(0,255), random(0,255));
-   ellipse(x,y,playerDiamater,playerDiamater);
+   ellipse(x,y,10,10);
   }
   
   //Check if up, down, left, and right are pressed/released and set them to false/true if they are pressed/released.

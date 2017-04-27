@@ -42,7 +42,11 @@ void draw() {
     //"(not the right end)" small constant size below in red
   //}
   */
-  image(img, 0, 0);
+  if(player.x > 800){
+    rainbowing = true;
+  } else{
+    rainbowing = false;
+  }
   /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
   */
@@ -83,6 +87,9 @@ void draw() {
   //Display Maze Grid
   for (int i = 0; i < fullGrid.size(); i++) {
     fullGrid.get(i).display();
+  }
+  if(rainbowing){
+    image(img, 200, 100);
   }
 }
 

@@ -34,7 +34,7 @@ class GridCoord {
     if (on) {
       if(mouseX > 850 && mouseY < 50){//if mouse is in top right 50 pixel corner
         fill(random(0,255), random(0,255), random(0,255));//make the maze throwup
-      } else if (mouseX > 850 && mouseY > 650){//if mouse is in bottom right 50 pixel corner
+      } else if (rainbowing){//if mouse is in bottom right 50 pixel corner
         float rainbowR = ((cos((float(rainbow) / 20) + ((PI) / 3)))* 127) + 127;
         float rainbowG = ((cos((float(rainbow) / 20) + ((2 * PI) / 3)))* 127) + 127;
         float rainbowB = ((cos((float(rainbow) / 20) + ((4 * PI) / 3)))* 127) + 127;

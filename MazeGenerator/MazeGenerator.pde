@@ -19,9 +19,10 @@ int startPointY = (int(random(2,49)));
 float rndR = random(0, 255);
 float rndG = random(0, 255);
 float rndB = random(0, 255);
-float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
-PImage img;
+float scaled;
+PImage img, img2;
 boolean rainbowing = false;
+int rainbow = 0;
 
 void setup() {
   size(900, 700);  
@@ -30,22 +31,17 @@ void setup() {
   gen = true;
   frameRate(1);
   img = loadImage("welcometotheinternetsayscole.jpeg");
+  img2 = loadImage("Joke.jpg");
+  fill(200, 200, 200);//make grey(increase all at same rate to make lighter)
+  textSize(50);//make text small
+  text("joke", 0, 850);//display joke in bottom left corner
 }
 void draw() {
-  /*
-  //if(the player reaches a deadend){//if the player reaches a dead end
-    background(255);
-    float scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
-    textSize(scaled);
-    fill(rndR, rndG, rndB);//fill with random colors once
-    text("Congragulations, you reached an end", width/2, height/2);//display "Congragulations, you reached and end" at the middle
-    //"(not the right end)" small constant size below in red
-  //}
-  */
-  if(player.x > 800){
-    rainbowing = true;
-  } else{
-    rainbowing = false;
+  scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
+  if(player.x > 800){//if player finishes the maze
+    rainbowing = true;//activate rainbow
+  } else{//otherwise
+    rainbowing = false;//no rainbow :(
   }
   /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
@@ -61,10 +57,10 @@ void draw() {
   */
   for (int i=0; i < fullGrid.size(); i++) {
     if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc-5 && player.x < fullGrid.get(i).xLoc+19 && player.y < fullGrid.get(i).yLoc+19 && player.y > fullGrid.get(i).yLoc-5 || player.x < 0 || player.y < 0 || player.y > height) {
-    player.x = player.prevX;
-    player.y = player.prevY;
+      player.x = player.prevX;
+      player.y = player.prevY;
     }
-}
+  }
   background(255);
   player.drawLoop();
   if (gen) {
@@ -89,17 +85,42 @@ void draw() {
     fullGrid.get(i).display();
   }
   if(rainbowing){
-    image(img, 200, 100);
+    imageMode(CENTER);//move image to center
+    image(img, width/2, height/2);
+    textSize(scaled);
+    fill(rainbower(rainbow, 0), rainbower(rainbow, 2), rainbower(rainbow, 4));
+    text("Y", (width/2)-(scaled*3)-25, height/2);
+    fill(rainbower(rainbow+30, 0), rainbower(rainbow+30, 2), rainbower(rainbow+30, 4));
+    text("o", (width/2)-(scaled*2)-25, height/2);
+    fill(rainbower(rainbow+60, 0), rainbower(rainbow+60, 2), rainbower(rainbow+60, 4));
+    text("u", (width/2)-scaled-25, height/2);
+    fill(rainbower(rainbow+90, 0), rainbower(rainbow+90, 2), rainbower(rainbow+90, 4));
+    text("W", (width/2)+scaled+25, height/2);
+    fill(rainbower(rainbow+120, 0), rainbower(rainbow+120, 2), rainbower(rainbow+120, 4));
+    text("i", (width/2)+(scaled*2)+35, height/2);
+    fill(rainbower(rainbow+180, 0), rainbower(rainbow+180, 2), rainbower(rainbow+180, 4));
+    text("n", (width/2)+(scaled*3)+25, height/2);
+    rainbow++;
   }
+  if(mouseX < 15 && mouseY > height-15){//if mouse is in bottom left coorner(this if statment if cole's code)
+    textSize(scaled);//make the textSize bigger the farther from the middle
+    textAlign(CENTER);//move text to center
+    fill(rndR, rndG, rndB);//fill with random colors once
+    text("Would you like to hear a joke?", width/2, height/2);//displays text
+    text("Hold something", width/2, height/2+50);
+    if(keyPressed == true){
+      imageMode(CENTER);//move image to center
+      img2.resize(width, height);//make the image take up the entire screen
+      image(img2, width/2, height/2);//display meme from prequalmemes
+    }
+    }
 }
-
 
 void keyReleased(){//if any key is released
   player.keyLoop(false);
 }
 void keyPressed(){//if any key is pressed
   player.keyLoop(true);
-
 }
 /* 
 Peyton Tanzillo's Code
@@ -185,3 +206,7 @@ GridCoord mazeGenDraw(GridCoord coord) {
 /* 
 End Peyton Tanzillo's code
 */
+
+  float rainbower(int rainbow, int shift)  {
+   return ((cos((float(rainbow) / 20) + ((shift * PI) / 3)))* 127) + 127;
+  }

@@ -7,7 +7,7 @@
  */
 class Player {
   //X and Y locations
-  float x, y;
+  float x = 10, y = height/2;
   //prevX and prevY locations
   float prevX = x, prevY = y;
   //Is up, down, left, and right being pressed?
@@ -25,7 +25,7 @@ class Player {
   left = false;
   down = false;
   right = false;
-  //Move speed is 3
+  //Move speed is 2
   moveSpeed = 2;
 }
 

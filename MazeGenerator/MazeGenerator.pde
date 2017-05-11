@@ -1,13 +1,13 @@
 /*
 Cole, Peyton, and Eliza
-
-Team Gerald
-Maze Generation Project
-*/
+ 
+ Team Gerald
+ Maze Generation Project
+ */
 
 import java.util.Map;
 
-boolean gen;
+boolean gen, menuing;
 int prevDirection, count;
 GridCoord currCoord;
 Player player = new Player(20, height/2);
@@ -15,21 +15,20 @@ ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<Integer> checkLater = new ArrayList<Integer>();
 int currentRate = 1;
 float currentPlace = 1;
-int startPointY = (int(random(2,49)));
-float rndR = random(0, 255);
-float rndG = random(0, 255);
-float rndB = random(0, 255);
+int startPointY = (int(random(2, 49)));
+float rndR = random(0, 255), rndG = random(0, 255), rndB = random(0, 255);
 float scaled;
 PImage img, img2;
 boolean rainbowing = false;
 int rainbow = 0;
+Menu menu;
 
 void setup() {
   size(900, 700);  
+  menu = new Menu();
+  menuing = true;
   resetGrid();
   mazeSetup();
-  gen = true;
-  frameRate(1);
   img = loadImage("welcometotheinternetsayscole.jpeg");
   img2 = loadImage("Joke.jpg");
   fill(200, 200, 200);//make grey(increase all at same rate to make lighter)
@@ -37,15 +36,15 @@ void setup() {
   text("joke", 0, 850);//display joke in bottom left corner
 }
 void draw() {
-  scaled = map(abs(width/2-mouseX), 0, 450, 0, 48);
-  if(player.x > 800){//if player finishes the maze
+  scaled = map(abs(width/2 - mouseX), 0, 450, 0, 48);
+  if (player.x > 800) {//if player finishes the maze
     rainbowing = true;//activate rainbow
-  } else{//otherwise
+  } else {//otherwise
     rainbowing = false;//no rainbow :(
   }
   /*
     CHO WANTS PARTIAL CREDIT FOR THESE LINES TO SETUP THE MAZE GENERATION ANIMATION GIVE HIM CREDIT \/ \/ 
-  */
+   */
   if (currentRate < 60) {
     currentRate++;
     frameRate(currentRate);
@@ -53,8 +52,8 @@ void draw() {
     currentPlace += .1;
   }
   /* 
-  OKAY CHO DOESN'T WANT CREDIT ANYMORE THAT IS ALL KTHXBAI
-  */
+   OKAY CHO DOESN'T WANT CREDIT ANYMORE THAT IS ALL KTHXBAI
+   */
   for (int i=0; i < fullGrid.size(); i++) {
     if (fullGrid.get(i).on == true && player.x > fullGrid.get(i).xLoc-5 && player.x < fullGrid.get(i).xLoc+19 && player.y < fullGrid.get(i).yLoc+19 && player.y > fullGrid.get(i).yLoc-5 || player.x < 0 || player.y < 0 || player.y > height) {
       player.x = player.prevX;
@@ -62,7 +61,6 @@ void draw() {
     }
   }
   background(255);
-  player.drawLoop();
   if (gen) {
     GridCoord coord = currCoord;
     for (int i = 0; i < currentPlace; i++) {
@@ -79,12 +77,18 @@ void draw() {
     gen = false;
   }
   noStroke();
-  
-  //Display Maze Grid
-  for (int i = 0; i < fullGrid.size(); i++) {
-    fullGrid.get(i).display();
+  if (menuing) {
+    menu.display();
+  } else {
+    //Display Maze Grid
+    for (int i = 0; i < fullGrid.size(); i++) {
+      fullGrid.get(i).display();
+    }
+    //Dis-player
+    player.drawLoop();
   }
-  if(rainbowing){
+
+  if (rainbowing) {
     imageMode(CENTER);//move image to center
     image(img, width/2, height/2);
     textSize(scaled);
@@ -102,31 +106,35 @@ void draw() {
     text("n", (width/2)+(scaled*3)+25, height/2);
     rainbow++;
   }
-  if(mouseX < 15 && mouseY > height-15){//if mouse is in bottom left coorner(this if statment if cole's code)
+
+  if (mouseX < 15 && mouseY > height-15) {//if mouse is in bottom left coorner(this if statment if cole's code)
     textSize(scaled);//make the textSize bigger the farther from the middle
     textAlign(CENTER);//move text to center
     fill(rndR, rndG, rndB);//fill with random colors once
     text("Would you like to hear a joke?", width/2, height/2);//displays text
     text("Hold something", width/2, height/2+50);
-    if(keyPressed == true){
+    if (keyPressed == true) {
       imageMode(CENTER);//move image to center
       img2.resize(width, height);//make the image take up the entire screen
       image(img2, width/2, height/2);//display meme from prequalmemes
     }
-    }
+  }
 }
 
-void keyReleased(){//if any key is released
+void keyReleased() {//if any key is released
   player.keyLoop(false);
 }
-void keyPressed(){//if any key is pressed
+void keyPressed() {//if any key is pressed
   player.keyLoop(true);
+  if (menuing) {
+    menu.keyPressLoop();
+  }
 }
 /* 
-Peyton Tanzillo's Code
-*/
+ Peyton Tanzillo's Code
+ */
 //The full function for generating a maze
-void mazeSetup() {
+void mazeSetup() { //<>//
   //Create a coordinate for reference so we can call the correct values
   currCoord = new GridCoord(1, startPointY, false);
   //Get the entrance coord and make it false
@@ -138,7 +146,8 @@ void mazeSetup() {
   checkLater.add(currCoord.XYtoIndex());
   //Set the inital "previous direction" to 3, as it came from the West (N:0 E:1 S:2 W:3)
   prevDirection = 3;
-  //After the maze is generated, create a random exit.
+  gen = true;
+  frameRate(1);
 }
 
 void mazeGenEnd() {
@@ -151,8 +160,9 @@ void mazeGenEnd() {
       exits.append(exitHelp.XYtoIndex());
     }
   }
+  
   //Once that list is generated, get a random number in that list and make that the exit.
-  exitHelp = fullGrid.get(exits.get(int(random(0,exits.size()))));
+  exitHelp = fullGrid.get(exits.get(int(random(0, exits.size()))));
   exitHelp.x += 1;
   fullGrid.get(exitHelp.XYtoIndex()).on = false;
 }
@@ -182,31 +192,31 @@ void resetGrid() {
 
 GridCoord mazeGenDraw(GridCoord coord) {
   //Generate a direction for the cell to go
-    int direction = coord.whichDirection(prevDirection);
-    //If it generates any direction (4 returns when there is no direction it can go)
-    if (direction != 4) {
-      //Get the previous direction
-      prevDirection = direcToPrev(direction);
-      //Move the focus in the specified direction
-      coord = coord.goDirection(direction);
-      //Set this new spot to be empty
-      fullGrid.get(coord.XYtoIndex()).on = false;
-    } else {
-      //Set the previous direction to have none
-      prevDirection = 4;
-      //Find a random index in checkLater and make that the new focus
-      int newBranch = int(random(0, checkLater.size()));
-      coord = fullGrid.get(checkLater.get(newBranch));
-      //Remove the branch from checkLater, so it doesn't check the same spot twice.
-      checkLater.remove(newBranch);
-    }
-    return coord;
+  int direction = coord.whichDirection(prevDirection);
+  //If it generates any direction (4 returns when there is no direction it can go)
+  if (direction != 4) {
+    //Get the previous direction
+    prevDirection = direcToPrev(direction);
+    //Move the focus in the specified direction
+    coord = coord.goDirection(direction);
+    //Set this new spot to be empty
+    fullGrid.get(coord.XYtoIndex()).on = false;
+  } else {
+    //Set the previous direction to have none
+    prevDirection = 4;
+    //Find a random index in checkLater and make that the new focus
+    int newBranch = int(random(0, checkLater.size()));
+    coord = fullGrid.get(checkLater.get(newBranch));
+    //Remove the branch from checkLater, so it doesn't check the same spot twice.
+    checkLater.remove(newBranch);
+  }
+  return coord;
 }
 
 /* 
-End Peyton Tanzillo's code
-*/
+ End Peyton Tanzillo's code
+ */
 
-  float rainbower(int rainbow, int shift)  {
-   return ((cos((float(rainbow) / 20) + ((shift * PI) / 3)))* 127) + 127;
-  }
+float rainbower(int rainbow, int shift) {
+  return ((cos((float(rainbow) / 20) + ((shift * PI) / 3)))* 127) + 127;
+}

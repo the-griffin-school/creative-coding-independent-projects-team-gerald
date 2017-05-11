@@ -21,14 +21,12 @@ float scaled;
 PImage img, img2;
 boolean rainbowing = false;
 int rainbow = 0;
-Menu menu;
+Menu fullmenu;
 
 void setup() {
   size(900, 700);  
-  menu = new Menu();
+  fullmenu = new Menu();
   menuing = true;
-  resetGrid();
-  mazeSetup();
   img = loadImage("welcometotheinternetsayscole.jpeg");
   img2 = loadImage("Joke.jpg");
   fill(200, 200, 200);//make grey(increase all at same rate to make lighter)
@@ -78,9 +76,10 @@ void draw() {
   }
   noStroke();
   if (menuing) {
-    menu.display();
+    fullmenu.display();
   } else {
     //Display Maze Grid
+    rectMode(CENTER);
     for (int i = 0; i < fullGrid.size(); i++) {
       fullGrid.get(i).display();
     }
@@ -126,15 +125,18 @@ void keyReleased() {//if any key is released
 }
 void keyPressed() {//if any key is pressed
   player.keyLoop(true);
+}
+
+void mousePressed() {
   if (menuing) {
-    menu.keyPressLoop();
+    fullmenu.keyPressLoop();
   }
 }
 /* 
  Peyton Tanzillo's Code
- */
+ */ //<>//
 //The full function for generating a maze
-void mazeSetup() { //<>//
+void mazeSetup() {
   //Create a coordinate for reference so we can call the correct values
   currCoord = new GridCoord(1, startPointY, false);
   //Get the entrance coord and make it false

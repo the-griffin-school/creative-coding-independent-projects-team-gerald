@@ -13,7 +13,7 @@ GridCoord currCoord;
 Player player = new Player(20, height/2);
 ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
 ArrayList<Integer> checkLater = new ArrayList<Integer>();
-int currentRate = 1;
+int currentRate = 60;
 float currentPlace = 1;
 int startPointY = (int(random(2, 49)));
 float rndR = random(0, 255), rndG = random(0, 255), rndB = random(0, 255);
@@ -27,6 +27,8 @@ void setup() {
   size(900, 700);  
   fullmenu = new Menu();
   menuing = true;
+  resetGrid();
+  mazeSetup();
   img = loadImage("welcometotheinternetsayscole.jpeg");
   img2 = loadImage("Joke.jpg");
   fill(200, 200, 200);//make grey(increase all at same rate to make lighter)
@@ -132,9 +134,9 @@ void mousePressed() {
     fullmenu.keyPressLoop();
   }
 }
-/* 
+/*  //<>//
  Peyton Tanzillo's Code
- */ //<>//
+ */
 //The full function for generating a maze
 void mazeSetup() {
   //Create a coordinate for reference so we can call the correct values
@@ -150,6 +152,8 @@ void mazeSetup() {
   prevDirection = 3;
   gen = true;
   frameRate(1);
+  currentRate = 1;
+  currentPlace = 1;
 }
 
 void mazeGenEnd() {

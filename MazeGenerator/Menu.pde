@@ -34,7 +34,6 @@ class Menu {
     menu = true;
     controls = false;
   }
-  
   void display() {
   if (menu == true) { 
     if ((start == false) && (options == false)) { 
@@ -88,10 +87,19 @@ class Menu {
     }
   }
     
-    if (options == true) {  //OPTIONS
+    if (options == true) {//OPTIONS
       if ((mouseX > 0) && (mouseX < 200) && (mouseY > 10) && (mouseY < 110)) {
         optionsColor = color(20);
         rectCC = color(230);
+        rectMode(CENTER);
+        fill(174, 174, 174);
+        rect(width/2, height/2, 300, 30);
+        fill(0, 0, 0);
+        rect(mouseX, height/2, 70, 50);
+        float Idontcare = map(mouseX, 0, 200, 0, 100);
+        textAlign(CENTER, CENTER);
+        text(Idontcare, mouseX, height/2-100);
+        textAlign(TOP, TOP);
       }
       
       else {

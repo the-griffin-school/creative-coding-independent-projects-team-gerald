@@ -71,7 +71,7 @@ class GridCoord {
         //If it is possible to go in the main direction, add the direction more times so that it goes straight more often than it turns.
         if (directions.get(i) == mainDirec) {
           //Change this number to make the maze straighter (higher num) or jankier (lower num) "j < #"
-          for (int j = 0; j < 9; j++) {
+          for (int j = 0; j < Idontcare; j++) {
             possible.append(directions.get(i));
           }
         }

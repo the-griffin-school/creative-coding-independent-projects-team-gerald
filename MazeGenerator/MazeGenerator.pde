@@ -22,6 +22,8 @@ PImage img, img2;
 boolean rainbowing = false;
 int rainbow = 0;
 Menu fullmenu;
+float Idontcare;
+
 
 void setup() {
   size(900, 700);  
@@ -81,7 +83,7 @@ void draw() {
     fullmenu.display();
   } else {
     //Display Maze Grid
-    rectMode(CENTER);
+    rectMode(CORNER);
     for (int i = 0; i < fullGrid.size(); i++) {
       fullGrid.get(i).display();
     }

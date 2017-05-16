@@ -83,7 +83,7 @@ void draw() {
     fullmenu.display();
   } else {
     //Display Maze Grid
-    rectMode(CENTER);
+    rectMode(CORNER);
     for (int i = 0; i < fullGrid.size(); i++) {
       fullGrid.get(i).display();
     }

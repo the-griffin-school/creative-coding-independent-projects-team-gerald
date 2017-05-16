@@ -129,11 +129,11 @@ class Menu {
       text("Back",25,75);
       
       fill(230);
-      text("INPUT DIRECTIONS",75,200);
+      text("Move player using WASD. The goal is to solve the maze!",75,200);
     }
   
     if (start == true) {
-      menuing = false;//START
+      menuing = false; //START
       resetGrid();
       mazeSetup();
     }

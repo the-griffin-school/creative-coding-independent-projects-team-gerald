@@ -9,6 +9,7 @@ import java.util.Map;
 
 boolean gen, menuing;
 int prevDirection, count;
+int startTime = 0, waitTime = 3000;
 GridCoord currCoord;
 Player player = new Player(20, height/2);
 ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
@@ -39,6 +40,7 @@ void draw() {
   scaled = map(abs(width/2 - mouseX), 0, 450, 0, 48);
   if (player.x > 800) {//if player finishes the maze
     rainbowing = true;//activate rainbow
+    startTime = millis();
   } else {//otherwise
     rainbowing = false;//no rainbow :(
   }
@@ -106,6 +108,13 @@ void draw() {
     fill(rainbower(rainbow+180, 0), rainbower(rainbow+180, 2), rainbower(rainbow+180, 4));
     text("n", (width/2)+(scaled*3)+25, height/2);
     rainbow++;
+    if (millis() - (millis() - float(startTime)) > waitTime) {
+      rainbowing = false;
+      player.x = 50;
+      player.y = width/2;
+      resetGrid();
+      mazeSetup();
+    }
   }
 
   if (mouseX < 15 && mouseY > height-15) {//if mouse is in bottom left coorner(this if statment if cole's code)
@@ -219,10 +228,10 @@ GridCoord mazeGenDraw(GridCoord coord) {
   return coord;
 }
 
-/* 
- End Peyton Tanzillo's code
- */
-
 float rainbower(int rainbow, int shift) {
   return ((cos((float(rainbow) / 20) + ((shift * PI) / 3)))* 127) + 127;
 }
+
+/* 
+ End Peyton Tanzillo's code
+ */

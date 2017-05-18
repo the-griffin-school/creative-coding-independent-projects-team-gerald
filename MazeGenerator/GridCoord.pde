@@ -1,5 +1,5 @@
 /* 
-
+ 
  Team Gerald
  
  The class for a block within the grid. It can:
@@ -10,14 +10,14 @@
  
  Written by Peyton Tanzillo
  */
- 
+
 class GridCoord {
   //x & y location of the block relative to other blocks
   int x, y, xLoc, yLoc;
   //Is the block a wall (on) or a gap? (not on)
   boolean on;
   int rainbow;
-  
+
   GridCoord(int x, int y, boolean on) {
     this.x = x;
     this.y = y;
@@ -32,9 +32,9 @@ class GridCoord {
     yLoc = -14 + (y * 14); 
     //If it's a wall, display the block, if not, don't.
     if (on) {
-      if(mouseX > 850 && mouseY < 50){//if mouse is in top right 50 pixel corner
-        fill(random(0,255), random(0,255), random(0,255));//make the maze throwup
-      } else if (rainbowing){//if mouse is in bottom right 50 pixel corner
+      if (mouseX > 850 && mouseY < 50) {//if mouse is in top right 50 pixel corner
+        fill(random(0, 255), random(0, 255), random(0, 255));//make the maze throwup
+      } else if (rainbowing) {//if mouse is in bottom right 50 pixel corner
         float rainbowR = ((cos((float(rainbow) / 20) + ((PI) / 3)))* 127) + 127;
         float rainbowG = ((cos((float(rainbow) / 20) + ((2 * PI) / 3)))* 127) + 127;
         float rainbowB = ((cos((float(rainbow) / 20) + ((4 * PI) / 3)))* 127) + 127;
@@ -82,11 +82,11 @@ class GridCoord {
     if (possible.size() == 1) {
       return possible.get(0);
 
-    //If the size is greater than 1, add the index to checkLater because it might be able to branch in the future
-    //Return the only direction it can go
+      //If the size is greater than 1, add the index to checkLater because it might be able to branch in the future
+      //Return the only direction it can go
     } else if (possible.size() > 1) {
       checkLater.add(XYtoIndex());
-      return possible.get(int(random(0,possible.size())));
+      return possible.get(int(random(0, possible.size())));
       //If there are no direction it can go, return 4
     } else {
       return 4;
@@ -169,20 +169,20 @@ class GridCoord {
     //If direction 0, move north
     if (direction == 0) {
       y--;
-    //If direction 1, move east
+      //If direction 1, move east
     } else if (direction == 1) {
       x++;
-    //If direction 2, move south
+      //If direction 2, move south
     } else if (direction == 2) {
       y++;
-    //If direction 3, move west
+      //If direction 3, move west
     } else if (direction == 3) {
       x--;
     }
     //Return the new focus location
     return this;
   }
-  
+
   float checkIf255(float hue) {
     if (hue >= 255) {
       return 0;

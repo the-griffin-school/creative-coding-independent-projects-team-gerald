@@ -1,4 +1,4 @@
-/*
+/* //<>// //<>//
 Cole, Peyton, and Eliza
  
  Team Gerald
@@ -9,7 +9,7 @@ import java.util.Map;
 
 boolean gen, menuing;
 int prevDirection, count;
-int startTime = 0, waitTime = 3000;
+int startTime = 0, waitTime = 30000;
 GridCoord currCoord;
 Player player = new Player(20, height/2);
 ArrayList<GridCoord> fullGrid = new ArrayList<GridCoord>();
@@ -23,8 +23,8 @@ PImage img, img2;
 boolean rainbowing = false;
 int rainbow = 0;
 Menu fullmenu;
-float Idontcare;
-
+float Idontcare, sliderRect = 0;
+boolean clickable = false;
 
 void setup() {
   size(900, 700);  
@@ -110,7 +110,7 @@ void draw() {
     fill(rainbower(rainbow+180, 0), rainbower(rainbow+180, 2), rainbower(rainbow+180, 4));
     text("n", (width/2)+(scaled*3)+25, height/2);
     rainbow++;
-    if (millis() - (millis() - float(startTime)) > waitTime) {
+    if (millis() - float(startTime) < waitTime) {
       rainbowing = false;
       player.x = 50;
       player.y = width/2;
@@ -131,6 +131,23 @@ void draw() {
       image(img2, width/2, height/2);//display meme from prequalmemes
     }
   }
+  if (fullmenu.options == true) {//if in the options menu(slider)
+    rectMode(CENTER);//set rectMode to center
+    fill(174, 174, 174);//make grey
+    rect(width/2, height/2, 900, 30);//draw a horizontal rect across the screen in the middle
+    fill(255, 255, 255);//make black
+    text("Straightness", width/2-130, 50);
+    if (clickable == true) {
+      Idontcare = map(mouseX, 0, 900, 0, 100);//scale mouseX to the hardness of the maze
+      rect(mouseX, height/2, 70, 50);//draw rect at mouseX on a horizontal line in the middle
+      text(Idontcare, mouseX-50, height/2-50);//display the number above slider
+      sliderRect = mouseX;
+    } else {
+      Idontcare = map(sliderRect, 0, 900, 0, 100);//scale mouseX to the hardness of the maze
+      rect(sliderRect, height/2, 70, 50);//draw rect at mouseX on a horizontal line in the middle
+      text(Idontcare, sliderRect-50, height/2-50);//display the number above slider
+    }
+  }
 }
 
 void keyReleased() {//if any key is released
@@ -144,8 +161,13 @@ void mousePressed() {
   if (menuing) {
     fullmenu.keyPressLoop();
   }
+  clickable = true;//set clickable equal to true
 }
-/*  //<>//
+
+void mouseReleased() {
+  clickable = false;//set clickable equal to false
+}
+/* 
  Peyton Tanzillo's Code
  */
 //The full function for generating a maze
@@ -177,7 +199,7 @@ void mazeGenEnd() {
       exits.append(exitHelp.XYtoIndex());
     }
   }
-  
+
   //Once that list is generated, get a random number in that list and make that the exit.
   exitHelp = fullGrid.get(exits.get(int(random(0, exits.size()))));
   exitHelp.x += 1;

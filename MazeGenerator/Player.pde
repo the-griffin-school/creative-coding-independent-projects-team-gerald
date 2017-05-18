@@ -11,23 +11,23 @@ class Player {
   //prevX and prevY locations
   float prevX = x, prevY = y;
   //Is up, down, left, and right being pressed?
-  boolean up,left,down,right;
+  boolean up, left, down, right;
   //The speed that the player is moving at
   float moveSpeed;
   /* 
-  Player Constructor (x position, y position)
-  */
+   Player Constructor (x position, y position)
+   */
   Player(int x, int y) {
-  this.x = x;
-  this.y = y;
-  //Player is not pressing anything yet
-  up = false;
-  left = false;
-  down = false;
-  right = false;
-  //Move speed is 2
-  moveSpeed = 2;
-}
+    this.x = x;
+    this.y = y;
+    //Player is not pressing anything yet
+    up = false;
+    left = false;
+    down = false;
+    right = false;
+    //Move speed is 2
+    moveSpeed = 2;
+  }
 
   void drawLoop() {
     //Move the player
@@ -37,10 +37,10 @@ class Player {
     //No stroke on the circle
     noStroke();
     //Draw the player circle
-   fill(random(0,255), random(0,255), random(0,255));
-   ellipse(x,y,10,10);
+    fill(random(0, 255), random(0, 255), random(0, 255));
+    ellipse(x, y, 10, 10);
   }
-  
+
   //Check if up, down, left, and right are pressed/released and set them to false/true if they are pressed/released.
   void keyLoop(boolean test) {
     up = checkInput(87, test, up);
@@ -57,8 +57,8 @@ class Player {
       return curr;
     }
   }
-  
-  
+
+
   void move() {
     //If pressing up, move it up.
     if (up) {

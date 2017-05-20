@@ -91,8 +91,12 @@ void draw() {
     }
     //Dis-player
     player.drawLoop();
+    fill(0);
+    rect(0, 0, 100, 50);
+  textSize(35);
+  fill(255);
+  text("Menu", 0, 35);
   }
-
   if (rainbowing) {
     imageMode(CENTER);//move image to center
     image(img, width/2, height/2);
@@ -110,13 +114,14 @@ void draw() {
     fill(rainbower(rainbow+180, 0), rainbower(rainbow+180, 2), rainbower(rainbow+180, 4));
     text("n", (width/2)+(scaled*3)+25, height/2);
     rainbow++;
-    if (millis() - float(startTime) < waitTime) {
+    /*if (millis() - float(startTime) < waitTime) {
       rainbowing = false;
       player.x = 50;
       player.y = width/2;
       resetGrid();
       mazeSetup();
     }
+    */
   }
 
   if (mouseX < 15 && mouseY > height-15) {//if mouse is in bottom left coorner(this if statment if cole's code)
@@ -162,6 +167,15 @@ void mousePressed() {
     fullmenu.keyPressLoop();
   }
   clickable = true;//set clickable equal to true
+  if((mouseX <= 100 && mouseX >= 0) && (mouseY <= 50 && mouseY >= 0)){
+    menuing = true;
+    fullmenu.menu = true;
+    fullmenu.options = false;
+    fullmenu.controls = false;
+    fullmenu.start = false;
+    player.x = 50;
+    player.y = width/2;
+  }
 }
 
 void mouseReleased() {
